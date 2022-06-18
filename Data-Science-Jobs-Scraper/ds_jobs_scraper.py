@@ -1,7 +1,7 @@
 '''
 Scrape latest Data Science job offers in London using Indeed API.
 
-Note: If using, remember to specify your browser's User-Agent (line 21).
+Note: If using, remember to specify your browser's User-Agent (line 27).
 
 Author: Filip J. Cierkosz
 
@@ -19,7 +19,7 @@ import datetime
 joblist = []
 
 
-def getData():
+def get_data():
     '''
     Gets the data from the website.
     '''
@@ -33,7 +33,7 @@ def getData():
     return soup
 
 
-def refineData(soup):
+def refine_data(soup):
     '''
     Transforms the soup object, and extract the desired contents.
     '''
@@ -67,7 +67,7 @@ def refineData(soup):
     return joblist
 
 
-def clearFile(fn):
+def clear_file(fn):
     '''
     Optional usage. Clears the CSV datafile.
     '''
@@ -81,11 +81,11 @@ def main(fn):
     Invokes all functions and store the data in an appropriate file.
     '''
     # Clear the CSV file (optional).
-    #clearFile(fn)
+    #clear_file(fn)
 
     # Get data from the website, then refine it.
-    s = getData()
-    refineData(s)
+    s = get_data()
+    refine_data(s)
 
     # Create a pandas data frame and store the data in a CSV file.
     df = pd.DataFrame(joblist)

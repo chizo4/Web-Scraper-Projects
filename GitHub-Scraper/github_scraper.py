@@ -1,26 +1,28 @@
-# Get the time of your GitHub membership using GitHub API.
-# Written by: Filip J. Cierkosz
-# Date: 02/2022
+'''
+Get the time of your GitHub membership using GitHub API.
+
+Written by: Filip J. Cierkosz
+
+Date: 02/2022
+'''
 
 import json
 from urllib.request import urlopen
 from datetime import datetime
 
 # Get the number of days of being a GitHub member.
-def getMembershipTime(usr):
-    # Specify and access the URL.
+def get_membership_time(usr):
     url = 'https://api.github.com/users/'+usr
     response = urlopen(url)
-    # Load JSON object.
     obj = json.load(response)
     # Get the date of starting a GitHub account, convert it into 
     # a datetime object, then return the membership period by
     # subtracting accStartDate from currDate.
-    accStartDate = datetime.fromisoformat(obj['created_at'][:-1])
-    currDate = datetime.today()
-    memberTime = currDate-accStartDate
-    return f'You have been a GitHub member for {memberTime.days} days.'
+    acc_start_date = datetime.fromisoformat(obj['created_at'][:-1])
+    curr_date = datetime.today()
+    member_time = curr_date-acc_start_date
+    return f'You have been a GitHub member for {member_time.days} days.'
 
-# Test harness.
+# Sample.
 usr = '' # <-- Specify your username here!
-print(getMembershipTime(usr))
+print(get_membership_time(usr))
